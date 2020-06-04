@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import bcrypt from "bcryptjs";
 
 export default function Signup() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [hashedPassword, setHashedPassword] = useState("");
 
   const usernameChange = (e) => {
     setUsername(e.target.value);
@@ -23,18 +21,11 @@ export default function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const saltRounds = 10;
     if (passwordCheck) {
-      bcrypt.hash(password, saltRounds, function (err, hash) {
-        if (err) console.log(err);
-        else {
-          setHashedPassword(hash);
-        }
-      });
       await axios
         .post("http://localhost:4000/postmessages", {
           username: username,
-          password: hashedPassword,
+          password: password,
         })
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
