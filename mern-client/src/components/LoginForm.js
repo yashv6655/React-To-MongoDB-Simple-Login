@@ -3,6 +3,8 @@ import axios from "axios";
 import { Redirect, Link } from "react-router-dom";
 import bcrypt from "bcryptjs";
 
+let userId = "";
+
 export default function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -40,8 +42,9 @@ export default function LoginForm() {
     user.map((item) => {
       bcrypt.compare(password, item.password, function (err, res) {
         if (res) {
-          console.log("success");
+          userId = item._id;
           setLoggedIn(true);
+          console.log("success");
         } else {
           console.log("failed");
           setLoggedIn(false);
@@ -88,3 +91,5 @@ export default function LoginForm() {
     </div>
   );
 }
+
+export { userId };
