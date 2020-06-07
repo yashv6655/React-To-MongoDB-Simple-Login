@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 
 export default function Signup() {
@@ -21,15 +21,22 @@ export default function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (passwordCheck) {
+    if (passwordCheck()) {
       await axios
         .post("http://localhost:4000/postmessages", {
           username: username,
           password: password,
         })
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
+        .then((res) => {
+          console.log(res);
+          alert("Success. Please Go The Login Page.");
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("Success");
+        });
     } else {
+      alert("Passwords Don't Match");
       console.log("failed to signup");
     }
   };
