@@ -51,55 +51,58 @@ export default function Signup() {
 
   return (
     <div>
-      <form>
-        <div className="form-group">
-          <label htmlFor="exampleInputEmail1">Username</label>
-          <input
-            type="text"
-            className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            placeholder="Enter username"
-            onChange={usernameChange}
-            value={username}
-          />
-          <small id="emailHelp" className="form-text text-muted">
-            We'll never share your information with anyone else.
-          </small>
-        </div>
-        <div className="form-group">
-          <label htmlFor="exampleInputPassword1">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            id="exampleInputPassword1"
-            placeholder="Password"
-            onChange={passwordChange}
-            value={password}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="exampleInputPassword1">Confirm Password</label>
-          <input
-            type="password"
-            className="form-control"
-            id="exampleInputPassword1"
-            placeholder="Password"
-            onChange={confirmPasswordChange}
-            value={confirmPassword}
-          />
-        </div>
-        <button
-          type="submit"
-          onClick={handleSubmit}
-          className="btn btn-primary"
-        >
-          Submit
-        </button>
-        <Link className="btn btn-primary" to="/login">
-          Login
+      <div className="login-box">
+        <h2>Sign Up</h2>
+        <form>
+          <div className="form-group">
+            <label htmlFor="exampleInputEmail1">Username</label>
+            <input
+              type="text"
+              className="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Enter username"
+              onChange={usernameChange}
+              value={username}
+            />
+            <small id="emailHelp" className="form-text text-white">
+              We'll never share your information with anyone else.
+            </small>
+          </div>
+          <div className="form-group">
+            <label htmlFor="exampleInputPassword1">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              id="exampleInputPassword1"
+              placeholder="Password"
+              onChange={passwordChange}
+              value={password}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="exampleInputPassword1">Confirm Password</label>
+            <input
+              type="password"
+              className="form-control"
+              id="exampleInputPassword1"
+              placeholder="Password"
+              onChange={confirmPasswordChange}
+              value={confirmPassword}
+            />
+          </div>
+          <button
+            type="submit"
+            onClick={handleSubmit}
+            className="btn btn-primary"
+          >
+            Submit
+          </button>
+        </form>
+        <Link to="/login" className="text-white mt-5">
+          Back To Login
         </Link>
-      </form>
+      </div>
     </div>
   );
 }

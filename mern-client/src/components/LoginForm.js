@@ -55,39 +55,44 @@ export default function LoginForm() {
 
   return (
     <div>
-      <form>
-        <div className="form-group">
-          <label htmlFor="formGroupExampleInput">Log In</label>
-          <input
-            type="text"
-            className="form-control"
-            id="formGroupExampleInput2"
-            placeholder="Username"
-            onChange={usernameChange}
-            value={username}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="formGroupExampleInput2">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            id="formGroupExampleInput2"
-            placeholder="Another input"
-            onChange={passwordChange}
-            value={password}
-          />
-        </div>
-        <button
-          type="submit"
-          className="btn btn-primary"
-          onClick={handleSubmit}
-        >
-          Login
-        </button>
-        {loggedIn ? <Redirect to="/complete" /> : <p>Please Log In</p>}
-      </form>
-      <Link to="/signup">signup</Link>
+      <div className="login-box">
+        <h2>Log In</h2>
+        <form>
+          <div className="form-group">
+            <label htmlFor="formGroupExampleInput">Log In</label>
+            <input
+              type="text"
+              className="form-control"
+              id="formGroupExampleInput2"
+              placeholder="Username"
+              onChange={usernameChange}
+              value={username}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="formGroupExampleInput2">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              id="formGroupExampleInput2"
+              placeholder="Password"
+              onChange={passwordChange}
+              value={password}
+            />
+          </div>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            onClick={handleSubmit}
+          >
+            Login
+          </button>
+          {loggedIn ? <Redirect to="/complete" /> : <p>Please Log In</p>}
+        </form>
+        <Link to="/signup" className="text-white">
+          Signup
+        </Link>
+      </div>
     </div>
   );
 }
