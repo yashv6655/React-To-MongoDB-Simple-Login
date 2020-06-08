@@ -67,6 +67,7 @@ export default function LoginForm() {
               placeholder="Username"
               onChange={usernameChange}
               value={username}
+              required
             />
           </div>
           <div className="form-group">
@@ -78,6 +79,7 @@ export default function LoginForm() {
               placeholder="Password"
               onChange={passwordChange}
               value={password}
+              required
             />
           </div>
           <button
@@ -87,11 +89,20 @@ export default function LoginForm() {
           >
             Login
           </button>
-          {loggedIn ? <Redirect to="/complete" /> : <p>Please Log In</p>}
+          {loggedIn ? (
+            <Redirect to="/complete" />
+          ) : (
+            <p className="text-white">Please Log In</p>
+          )}
         </form>
-        <Link to="/signup" className="text-white">
-          Signup
-        </Link>
+        <div className="text-center">
+          <Link to="/signup" className="text-white">
+            Signup
+          </Link>
+          <Link to="/forgotpassword" className="text-white ml-5">
+            Forgot Password?
+          </Link>
+        </div>
       </div>
     </div>
   );

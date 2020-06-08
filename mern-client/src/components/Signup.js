@@ -55,7 +55,9 @@ export default function Signup() {
         <h2>Sign Up</h2>
         <form>
           <div className="form-group">
-            <label htmlFor="exampleInputEmail1">Username</label>
+            <label htmlFor="exampleInputEmail1" className="text-white">
+              Username
+            </label>
             <input
               type="text"
               className="form-control"
@@ -65,12 +67,14 @@ export default function Signup() {
               onChange={usernameChange}
               value={username}
             />
-            <small id="emailHelp" className="form-text text-white">
+            <small id="emailHelp" className="form-text text-warning">
               We'll never share your information with anyone else.
             </small>
           </div>
           <div className="form-group">
-            <label htmlFor="exampleInputPassword1">Password</label>
+            <label htmlFor="exampleInputPassword1" className="text-white">
+              Password
+            </label>
             <input
               type="password"
               className="form-control"
@@ -81,7 +85,9 @@ export default function Signup() {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="exampleInputPassword1">Confirm Password</label>
+            <label htmlFor="exampleInputPassword1" className="text-white">
+              Confirm Password
+            </label>
             <input
               type="password"
               className="form-control"
