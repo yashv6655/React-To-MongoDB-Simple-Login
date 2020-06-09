@@ -6,13 +6,13 @@ import bcrypt from "bcryptjs";
 let userId = "";
 
 export default function LoginForm() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const usernameChange = (e) => {
-    setUsername(e.target.value);
+  const emailChange = (e) => {
+    setEmail(e.target.value);
   };
 
   const passwordChange = (e) => {
@@ -25,11 +25,23 @@ export default function LoginForm() {
       .get("http://localhost:4000/postmessages")
       .then((res) => {
         setUser(res.data);
+        user.map((item) => {
+          bcrypt.compare(password, item.password, function (err, res) {
+            if (res) {
+              userId = item._id;
+              setLoggedIn(true);
+              console.log("success");
+            } else {
+              console.log("failed");
+              setLoggedIn(false);
+            }
+          });
+        });
         console.log(res.data);
       })
       .catch((err) => console.log(err));
     // user.map((item) => {
-    //   if (item.username === username && item.password === password) {
+    //   if (item.email === email && item.password === password) {
     //     console.log("Success");
     //     setLoggedIn(true);
     //     return loggedIn;
@@ -39,18 +51,6 @@ export default function LoginForm() {
     //     return loggedIn;
     //   }
     // });
-    user.map((item) => {
-      bcrypt.compare(password, item.password, function (err, res) {
-        if (res) {
-          userId = item._id;
-          setLoggedIn(true);
-          console.log("success");
-        } else {
-          console.log("failed");
-          setLoggedIn(false);
-        }
-      });
-    });
   };
 
   return (
@@ -61,12 +61,12 @@ export default function LoginForm() {
           <div className="form-group">
             <label htmlFor="formGroupExampleInput">Log In</label>
             <input
-              type="text"
+              type="email"
               className="form-control"
               id="formGroupExampleInput2"
-              placeholder="Username"
-              onChange={usernameChange}
-              value={username}
+              placeholder="Email"
+              onChange={emailChange}
+              value={email}
               required
             />
           </div>

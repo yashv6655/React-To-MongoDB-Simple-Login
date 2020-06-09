@@ -3,12 +3,12 @@ import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 
 export default function Signup() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const usernameChange = (e) => {
-    setUsername(e.target.value);
+  const emailChange = (e) => {
+    setEmail(e.target.value);
   };
 
   const passwordChange = (e) => {
@@ -24,7 +24,7 @@ export default function Signup() {
     if (passwordCheck()) {
       await axios
         .post("http://localhost:4000/postmessages", {
-          username: username,
+          email: email,
           password: password,
         })
         .then((res) => {
@@ -56,16 +56,16 @@ export default function Signup() {
         <form>
           <div className="form-group">
             <label htmlFor="exampleInputEmail1" className="text-white">
-              Username
+              Email
             </label>
             <input
-              type="text"
+              type="email"
               className="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
-              placeholder="Enter username"
-              onChange={usernameChange}
-              value={username}
+              placeholder="Enter Email"
+              onChange={emailChange}
+              value={email}
             />
             <small id="emailHelp" className="form-text text-warning">
               We'll never share your information with anyone else.

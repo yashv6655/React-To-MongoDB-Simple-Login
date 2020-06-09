@@ -22,7 +22,7 @@ router.post("/", (req, res) => {
     var newRecord = new PostMessage({
       title: req.body.title,
       message: req.body.message,
-      username: req.body.username,
+      email: req.body.email,
       password: hash,
     });
     newRecord.save((err, docs) => {

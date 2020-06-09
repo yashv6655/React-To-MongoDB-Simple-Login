@@ -5,7 +5,7 @@ var PostMessage = mongoose.model(
   {
     title: { type: String },
     message: { type: String },
-    username: { type: String },
+    email: { type: String },
     password: { type: String },
   },
   "testCollection"
