@@ -39,7 +39,9 @@ export default function LoginForm() {
         });
         console.log(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+      });
     // user.map((item) => {
     //   if (item.email === email && item.password === password) {
     //     console.log("Success");

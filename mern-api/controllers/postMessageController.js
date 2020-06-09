@@ -20,8 +20,6 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
     var newRecord = new PostMessage({
-      title: req.body.title,
-      message: req.body.message,
       email: req.body.email,
       password: hash,
     });
@@ -39,26 +37,27 @@ router.post("/", (req, res) => {
 router.put("/:id", (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("No record with given id : " + req.params.id);
-
   var updatedRecord = {
-    title: req.body.title,
-    message: req.body.message,
-    username: req.body.username,
     password: req.body.password,
   };
-
-  PostMessage.findByIdAndUpdate(
-    req.params.id,
-    { $set: updatedRecord },
-    { new: true },
-    (err, docs) => {
-      if (!err) res.send(docs);
-      else
-        console.log(
-          "Error while updating a record : " + JSON.stringify(err, undefined, 2)
-        );
-    }
-  );
+  bcrypt.hash(updatedRecord.password, saltRounds, function (err, hash) {
+    updatedRecord.password = hash;
+    if (err) console.log(err);
+    else console.log("Password Hashed");
+    PostMessage.findByIdAndUpdate(
+      { _id: req.params.id },
+      { $set: updatedRecord },
+      { new: true },
+      (err, docs) => {
+        if (!err) res.send(docs);
+        else
+          console.log(
+            "Error while updating a record : " +
+              JSON.stringify(err, undefined, 2)
+          );
+      }
+    );
+  });
 });
 
 router.delete("/:id", (req, res) => {

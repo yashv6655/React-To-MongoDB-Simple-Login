@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "./Context";
+import axios from "axios";
 
 export default function ForgotPassword() {
-  const [users, setUsers] = useState([]);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [userId, setUserId] = useState("");
+
+  const { users } = useContext(UserContext);
 
   const userIdChange = (e) => {
     setUserId(e.target.value);
@@ -17,6 +20,32 @@ export default function ForgotPassword() {
 
   const confirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
+  };
+
+  const passwordCheck = () => {
+    if (password === confirmPassword) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const changePassword = () => {
+    if (passwordCheck()) {
+      users.map((user) => {
+        if (userId === user._id) {
+          axios
+            .put("http://localhost:4000/postmessages/" + userId, {
+              password: password,
+            })
+            .then((res) => {
+              console.log(res);
+              alert("Successfully changed your passoword");
+            })
+            .catch((err) => console.log(err));
+        }
+      });
+    }
   };
 
   return (
@@ -39,7 +68,7 @@ export default function ForgotPassword() {
           <div className="form-group">
             <label htmlFor="formGroupExampleInput">Password</label>
             <input
-              type="text"
+              type="password"
               className="form-control"
               id="formGroupExampleInput2"
               placeholder="Password"
@@ -51,7 +80,7 @@ export default function ForgotPassword() {
           <div className="form-group">
             <label htmlFor="formGroupExampleInput">Confirm Password</label>
             <input
-              type="text"
+              type="password"
               className="form-control"
               id="formGroupExampleInput2"
               placeholder="Confirm Password"
@@ -60,6 +89,9 @@ export default function ForgotPassword() {
               required
             />
           </div>
+          <button className="btn btn-primary" onClick={changePassword}>
+            Change Password
+          </button>
         </form>
         <Link to="/login" className="text-white">
           Back To Login
