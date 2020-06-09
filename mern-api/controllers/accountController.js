@@ -4,10 +4,10 @@ var ObjectID = require("mongoose").Types.ObjectId;
 var bcrypt = require("bcryptjs");
 const saltRounds = 10;
 
-var { PostMessage } = require("../models/postMessage");
+var { Account } = require("../models/account");
 
 router.get("/", (req, res) => {
-  PostMessage.find((err, docs) => {
+  Account.find((err, docs) => {
     if (!err) res.send(docs);
     else
       console.log(
@@ -19,7 +19,7 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
   bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
-    var newRecord = new PostMessage({
+    var newRecord = new Account({
       email: req.body.email,
       password: hash,
     });
@@ -44,7 +44,7 @@ router.put("/:id", (req, res) => {
     updatedRecord.password = hash;
     if (err) console.log(err);
     else console.log("Password Hashed");
-    PostMessage.findByIdAndUpdate(
+    Account.findByIdAndUpdate(
       { _id: req.params.id },
       { $set: updatedRecord },
       { new: true },
@@ -64,7 +64,7 @@ router.delete("/:id", (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("No record with given id : " + req.params.id);
 
-  PostMessage.findByIdAndRemove(req.params.id, (err, docs) => {
+  Account.findByIdAndRemove(req.params.id, (err, docs) => {
     if (!err) res.send(docs);
     else
       console.log(

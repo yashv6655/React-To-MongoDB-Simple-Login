@@ -35,7 +35,7 @@ export default function ForgotPassword() {
       users.map((user) => {
         if (userId === user._id) {
           axios
-            .put("http://localhost:4000/postmessages/" + userId, {
+            .put("http://localhost:4000/accounts/" + userId, {
               password: password,
             })
             .then((res) => {

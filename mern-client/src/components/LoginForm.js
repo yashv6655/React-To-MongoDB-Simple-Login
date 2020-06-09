@@ -22,7 +22,7 @@ export default function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios
-      .get("http://localhost:4000/postmessages")
+      .get("http://localhost:4000/accounts")
       .then((res) => {
         setUser(res.data);
         user.map((item) => {
