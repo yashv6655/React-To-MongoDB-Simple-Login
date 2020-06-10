@@ -23,7 +23,7 @@ export default function Signup() {
     e.preventDefault();
     if (passwordCheck()) {
       await axios
-        .post("http://localhost:4000/accounts", {
+        .post("/accounts", {
           email: email,
           password: password,
         })
