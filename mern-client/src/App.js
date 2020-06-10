@@ -14,7 +14,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/accounts")
+      .get("/accounts")
       .then((res) => {
         setUsers(res.data);
         //console.log(res.data);

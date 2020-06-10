@@ -17,5 +17,6 @@
     "express": "^4.17.1",
     "mongoose": "^5.8.11",
     "passport": "^0.4.1"
-  }
+  },
+  "proxy": "http://localhost:4000"
 }
