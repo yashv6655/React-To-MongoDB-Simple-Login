@@ -13,3 +13,7 @@ app.listen(process.env.PORT || 4000, () =>
 );
 
 app.use("/accounts", accountRoutes);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("mern-client/build"));
+}
