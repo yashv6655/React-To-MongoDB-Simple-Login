@@ -33,7 +33,7 @@ export default function Signup() {
         })
         .catch((err) => {
           console.log(err);
-          alert("Success");
+          alert("Error. Please Try Again");
         });
     } else {
       alert("Passwords Don't Match");
